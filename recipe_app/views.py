@@ -6,3 +6,8 @@ from recipe_app.models import Recipe
 def index(request):
     data = Recipe.objects.all()
     return render(request, 'main.html', {'data': data})
+
+
+def recipes(request, id):
+    data = Recipe.objects.get(id=id)
+    return render(request, 'recipes.html', {'data': data})
