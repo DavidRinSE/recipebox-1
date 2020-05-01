@@ -5,4 +5,4 @@ from recipe_app.models import Recipe
 # Create your views here.
 def index(request):
     data = Recipe.objects.all()
-    return render(request, 'index.html', {'data': data})
+    return render(request, 'main.html', {'data': data})
