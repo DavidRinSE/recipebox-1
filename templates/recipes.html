@@ -7,26 +7,35 @@
     <!-- Link for bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Link for Google icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>RecipeBox</title>
   </head>
 
   <body>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+      <div class="container d-flex justify-content-between">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <i class="material-icons">home</i>
+          <strong>Home</strong>
+        </a>
+      </div>
+    </div>
     <div class="container">
-      <button type="button" class="btn btn-secondary mt-3">Home</button>
       <main role="main" class="inner cover py-3">
-        <h1 class="cover-heading text-center mb-4">{{data.title}}</h1>
+        <h1 class="cover-heading text-center mb-4">{{recipe.title}}</h1>
         <dl class="row mx-5">
           <dt class="col-sm-3">Time required</dt>
-          <dd class="col-sm-9">{{data.time_required}}</dd>
+          <dd class="col-sm-9">{{recipe.time_required}}</dd>
 
           <dt class="col-sm-3">Author</dt>
-          <dd class="col-sm-9">{{data.author}}</dd>
+          <dd class="col-sm-9">{{recipe.author}}</dd>
 
           <dt class="col-sm-3">Description</dt>
-          <dd class="col-sm-9">{{data.description}}</dd>
+          <dd class="col-sm-9">{{recipe.description}}</dd>
 
           <dt class="col-sm-3 text-truncate">Instructions</dt>
-          <dd class="col-sm-9">{{data.instructions}}</dd>
+          <dd class="col-sm-9">{{recipe.instructions}}</dd>
         </dl>
       </main>
     </div>
