@@ -15,7 +15,7 @@
   <body>
     <div class="navbar navbar-dark bg-dark box-shadow">
       <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand d-flex align-items-center">
+        <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center">
           <i class="material-icons">home</i>
           <strong>Home</strong>
         </a>
@@ -29,7 +29,7 @@
           <dd class="col-sm-9">{{recipe.time_required}}</dd>
 
           <dt class="col-sm-3">Author</dt>
-          <dd class="col-sm-9">{{recipe.author}}</dd>
+          <dd class="col-sm-9"><a href="{% url 'authors' recipe.author.id %}">{{recipe.author}}</a></dd>
 
           <dt class="col-sm-3">Description</dt>
           <dd class="col-sm-9">{{recipe.description}}</dd>
