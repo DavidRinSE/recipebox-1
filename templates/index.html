@@ -9,6 +9,16 @@
 
   <body>
     <h1>Hello World!</h1>
+    <ul>
+      {% for item in data %}
+      <li>
+        <h3>{{item.title}}</h3>
+        <p>by {{item.author}}</p>
+        <p>{{item.description}}</p>
+        <p>{{item.instructions}}</p>
+      </li>
+      {% endfor %}
+    </ul>
   </body>
 
 </html>
