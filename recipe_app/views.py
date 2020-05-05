@@ -15,8 +15,21 @@ def recipes(request, id):
     return render(request, 'recipes.html', {'recipe': data})
 
 
-def add_auhor(request):
-    pass
+def authors(request, id):
+    data_a = Author.objects.get(id=id)
+    data_r = Recipe.objects.filter(author_id=id)
+    return render(request, 'authors.html', {'author': data_a, "recipes": data_r})
+
+
+def add_author(request):
+    if request.method == 'POST':
+        form = AddAuthorForm(request.POST)
+        form.save()
+        return HttpResponseRedirect(reverse('home'))
+
+    form = AddAuthorForm()
+
+    return render(request, 'add_author_form.html', {'form': form})
 
 
 def add_recipe(request):
@@ -31,9 +44,3 @@ def add_recipe(request):
     form = AddRecipeForm()
 
     return render(request, 'add_recipe_form.html', {'form': form})
-
-
-def authors(request, id):
-    data_a = Author.objects.get(id=id)
-    data_r = Recipe.objects.filter(author_id=id)
-    return render(request, 'authors.html', {'author': data_a, "recipes": data_r})
