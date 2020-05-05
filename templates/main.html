@@ -11,8 +11,14 @@
   </head>
 
   <body class='text-center'>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+      <div class="container justify-content-end">
+        <a href="{% url 'addauthor' %}" class="btn btn-outline-light">Add an author</a>
+        <a href="{% url 'addrecipe' %}" class="btn btn-outline-light ml-4">Add a recipe</a>
+      </div>
+    </div>
     <div class='container'>
-      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+      <div class="jumbotron p-3 p-md-5 text-white rounded bg-info">
         <div class="px-0">
           <h1 class="display-4 font-italic">Recipes</h1>
           <p class="lead my-3">Check out the best recipes in the neighborhood</p>
