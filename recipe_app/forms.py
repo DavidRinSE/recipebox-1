@@ -3,6 +3,20 @@ from recipe_app.models import Author
 
 
 class AddAuthorForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Name'
+        }
+    ))
+
+    bio = forms.CharField(widget=forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Short bio...'
+        }
+    ))
+
     class Meta:
         model = Author
         fields = [
