@@ -9,6 +9,7 @@ python = "^3.8"
 django = "^3.0.5"
 faker = "^4.0.3"
 autopep8 = "^1.5.2"
+flake8 = "^3.7.9"
 
 [tool.poetry.dev-dependencies]
 
