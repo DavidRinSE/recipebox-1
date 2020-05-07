@@ -1,6 +1,7 @@
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 from recipe_app.models import Author, Recipe
 from recipe_app.forms import AddAuthorForm, AddRecipeForm, LoginForm
@@ -23,6 +24,7 @@ def authors(request, id):
     return render(request, 'authors.html', {'author': data_a, "recipes": data_r})
 
 
+@login_required
 def add_author(request):
     if request.method == 'POST':
         form = AddAuthorForm(request.POST)
@@ -34,6 +36,7 @@ def add_author(request):
     return render(request, 'add_author_form.html', {'form': form})
 
 
+@login_required
 def add_recipe(request):
     if request.method == 'POST':
         form = AddRecipeForm(request.POST)
