@@ -35,3 +35,8 @@ class AddRecipeForm(forms.Form):
     instructions = forms.CharField(widget=forms.Textarea(attrs={
         'placeholder': 'Enter Instructions here...'
     }))
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput)
