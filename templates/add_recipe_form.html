@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link for Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>RecipeBox - Create Recipe</title>
+  </head>
+
+  <body class='text-center'>
+    <div class='container'>
+      <form action="/addrecipe/" method="post">
+        {% csrf_token %}
+        <h1 class='my-3'>Create a Recipe</h1>
+        <div class='row'>
+          <div class='col py-2'>{{form.title.label}}: {{form.title}}</div>
+        </div>
+        <div class='row'>
+          <div class='col py-2'>{{form.author.label}}: {{form.author}}</div>
+          <div class='col py-2'>{{form.time_required.label}}: {{form.time_required}}</div>
+        </div>
+        <div class='row'>
+          <div class='col'>
+            <p class='align-self-start mb-0'>{{form.description.label}}:</p>{{form.description}}
+          </div>
+          <div class='col'>
+            <p class='align-self-start mb-0'>{{form.instructions.label}}:</p>{{form.instructions}}
+          </div>
+        </div>
+        <input type="submit" value="SUBMIT" class='btm btn-success btn-block w-75 mx-auto'>
+      </form>
+    </div>
+  </body>
+
+</html>
