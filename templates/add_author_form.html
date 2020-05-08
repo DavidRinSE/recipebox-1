@@ -16,11 +16,10 @@
     <form action="/addauthor/" method="post">
       <h1>Create Author</h1>
       {% csrf_token %}
-      <br />
       {{ form.name }}
-      <br />
+      {{ form.username }}
+      {{ form.password }}
       {{ form.bio }}
-      <br />
       <input class='btn btn-light rounded border-secondary' type="submit" value="SUBMIT">
     </form>
   </body>

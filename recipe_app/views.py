@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from recipe_app.models import Author, Recipe
 from recipe_app.forms import AddAuthorForm, AddRecipeForm, LoginForm
@@ -28,7 +29,12 @@ def authors(request, id):
 def add_author(request):
     if request.method == 'POST':
         form = AddAuthorForm(request.POST)
-        form.save()
+        if form.is_valid():
+            data = form.cleaned_data
+            user = User.objects.create_user(
+                username=data['username'], password=data['password'])
+            Author.objects.create(
+                name=data['name'], username=data['username'], user=user, bio=data['bio'])
         return HttpResponseRedirect(reverse('home'))
 
     form = AddAuthorForm()

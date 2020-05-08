@@ -2,21 +2,26 @@ from django import forms
 from recipe_app.models import Author
 
 
-class AddAuthorForm(forms.ModelForm):
+class AddAuthorForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
+        'class': 'form-control my-1',
         'placeholder': 'Name'
-    }
-    ))
+    }))
+
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control my-1',
+        'placeholder': 'Username'
+    }))
+
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class': 'form-control my-1',
+        'placeholder': 'Password'
+    }))
 
     bio = forms.CharField(widget=forms.Textarea(attrs={
-        'class': 'form-control',
+        'class': 'form-control my-1',
         'placeholder': 'Short bio...'}
     ))
-
-    class Meta:
-        model = Author
-        fields = ['name', 'bio']
 
 
 class AddRecipeForm(forms.Form):
