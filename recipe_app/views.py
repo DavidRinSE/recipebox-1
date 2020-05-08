@@ -27,6 +27,8 @@ def authors(request, id):
 
 @login_required
 def add_author(request):
+    if not request.user.is_staff:
+        return render(request, 'error.html', {'usr_auth': False})
     if request.method == 'POST':
         form = AddAuthorForm(request.POST)
         if form.is_valid():
