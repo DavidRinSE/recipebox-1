@@ -4,15 +4,23 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link for Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>RecipeBox - LogIn</title>
   </head>
 
-  <body>
-    <form action="" method='post'>
-      {% csrf_token %}
-      {{form.as_p}}
-      <input type="submit" value='SUBMIT'>
-    </form>
+  <body class='text-center'>
+    <div class='col-md-5 p-lg-5 mx-auto my-5 bg-dark'>
+      <form action="" method='post'>
+        {% csrf_token %}
+        {{form.username}}
+        <br />
+        {{form.password}}
+        <br />
+        <input class='btn btn-light rounded border-secondary' type="submit" value="LOG IN">
+      </form>
+    </div>
   </body>
 
 </html>
