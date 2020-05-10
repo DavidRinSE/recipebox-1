@@ -47,14 +47,14 @@ def add_author(request):
 @login_required
 def add_recipe(request):
     if request.method == 'POST':
-        form = AddRecipeForm(request.POST)
+        form = AddRecipeForm(request.POST, user=request.user)
         if form.is_valid():
             data = form.cleaned_data
             Recipe.objects.create(
-                title=data['title'], author=data['author'], description=data['description'], time_required=data['time_required'], instructions=data['instructions'])
+                title=data['title'], author=data['author'] if request.user.is_staff else data['author'].author, description=data['description'], time_required=data['time_required'], instructions=data['instructions'])
             return HttpResponseRedirect(reverse('home'))
 
-    form = AddRecipeForm()
+    form = AddRecipeForm(user=request.user)
 
     return render(request, 'add_recipe_form.html', {'form': form})
 

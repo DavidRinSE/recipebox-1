@@ -1,5 +1,6 @@
 from django import forms
 from recipe_app.models import Author
+from django.contrib.auth.models import User
 
 
 class AddAuthorForm(forms.Form):
@@ -25,6 +26,16 @@ class AddAuthorForm(forms.Form):
 
 
 class AddRecipeForm(forms.Form):
+    # def __init__() created with the help of Stack Overflow question
+    # https://stackoverflow.com/questions/3532316/django-forms-request-user
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(AddRecipeForm, self).__init__(*args, **kwargs)
+        if user.is_staff:
+            self.fields['author'].queryset = Author.objects.all()
+        else:
+            self.fields['author'].queryset = User.objects.filter(pk=user.id)
+
     title = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
         'class': 'w-50'
     }))
