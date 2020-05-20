@@ -12,9 +12,21 @@
 
   <body class='text-center'>
     <div class="navbar navbar-dark bg-dark box-shadow">
-      <div class="container justify-content-end">
-        <a href="{% url 'addauthor' %}" class="btn btn-outline-light">Add an author</a>
-        <a href="{% url 'addrecipe' %}" class="btn btn-outline-light ml-4">Add a recipe</a>
+      <div class='container d-flex justify-content-between'>
+        <div>
+          <a href="{% url 'addauthor' %}" class="btn btn-outline-light">Add an author</a>
+          <a href="{% url 'addrecipe' %}" class="btn btn-outline-light ml-4">Add a recipe</a>
+        </div>
+        {% if request.user.is_authenticated %}
+        <div>
+          <span class="text-light h5 my-auto">
+            Welcome {{request.user.username}}
+          </span>
+          <a href="{% url 'logout' %}" class="btn btn-outline-danger ml-4">Log out</a>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
+        {% endif %}
       </div>
     </div>
     <div class='container'>

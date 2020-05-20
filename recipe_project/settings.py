@@ -26,8 +26,10 @@ SECRET_KEY = 'xjo4vsvp=axdv_k-l9qn6_web1btcno-dia%d7qx@j(ks81$n6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
