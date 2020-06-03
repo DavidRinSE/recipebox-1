@@ -16,13 +16,20 @@ def index(request):
 
 def recipes(request, id):
     data = Recipe.objects.get(id=id)
-    return render(request, 'recipes.html', {'recipe': data})
+    loggedin = False
+    if request.user:
+        loggedin = True
+    edit = False
+    if request.user and (request.user.is_staff or request.user.author == data.author):
+        edit = True
+    return render(request, 'recipes.html', {'recipe': data, 'edit': edit, 'loggedin': loggedin})
 
 
 def authors(request, id):
     data_a = Author.objects.get(id=id)
+    data_f = data_a.favorites.all()
     data_r = Recipe.objects.filter(author_id=id)
-    return render(request, 'authors.html', {'author': data_a, "recipes": data_r})
+    return render(request, 'authors.html', {'author': data_a, "recipes": data_r, "favorites":data_f})
 
 
 @login_required
@@ -51,12 +58,60 @@ def add_recipe(request):
         if form.is_valid():
             data = form.cleaned_data
             Recipe.objects.create(
-                title=data['title'], author=data['author'] if request.user.is_staff else data['author'].author, description=data['description'], time_required=data['time_required'], instructions=data['instructions'])
+                title=data['title'], author=data['author'], description=data['description'], time_required=data['time_required'], instructions=data['instructions'])
             return HttpResponseRedirect(reverse('home'))
 
     form = AddRecipeForm(user=request.user)
 
     return render(request, 'add_recipe_form.html', {'form': form})
+
+
+@login_required
+def edit_recipe(request, id):
+    recipe = Recipe.objects.get(id=id)
+
+    if request.method == "POST":
+        form = AddRecipeForm(request.POST, user=request.user)
+        if form.is_valid():
+            data = form.cleaned_data
+
+            recipe.title = data["title"]
+            recipe.author = data["author"]
+            recipe.description = data["description"]
+            recipe.time_required = data["time_required"]
+            recipe.instructions = data["instructions"]
+
+            recipe.save()
+            return HttpResponseRedirect(reverse("recipes", kwargs={"id": id}))
+
+    if request.user.is_superuser or request.user.author == recipe.author:
+        form = AddRecipeForm(initial={
+            "title": recipe.title,
+            "author": recipe.author.id,
+            "description": recipe.description,
+            "time_required": recipe.time_required,
+            "instructions": recipe.instructions
+        }, user=request.user)
+        return render(request, 'edit_recipe_form.html', {"form": form})
+    else:
+        return HttpResponseRedirect(reverse("recipes", kwargs={"id": id}))
+
+
+@login_required
+def toggle_favorite(request, id):
+    author = request.user.author
+
+    try:
+        recipe = Recipe.objects.get(id=id)
+    except Recipe.DoesNotExist:
+        HttpResponseRedirect("/")
+
+    if recipe in author.favorites.all():
+        author.favorites.remove(recipe)
+    else:
+        author.favorites.add(recipe)
+    author.save()
+    return HttpResponseRedirect(reverse("recipes", kwargs={"id": id}))
 
 
 def loginview(request):

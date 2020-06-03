@@ -22,6 +22,9 @@
           <span class="text-light h5 my-auto">
             Welcome {{request.user.username}}
           </span>
+          {% if request.user.author %}
+            <a href="{% url 'authors' request.user.author.id %}" class="btn btn-secondary ml-4">Author</a>
+          {% endif %}
           <a href="{% url 'logout' %}" class="btn btn-outline-danger ml-4">Log out</a>
         </div>
         {% else %}

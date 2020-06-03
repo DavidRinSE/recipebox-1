@@ -34,7 +34,7 @@ class AddRecipeForm(forms.Form):
         if user.is_staff:
             self.fields['author'].queryset = Author.objects.all()
         else:
-            self.fields['author'].queryset = User.objects.filter(pk=user.id)
+            self.fields['author'].queryset = Author.objects.filter(user=user)
 
     title = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
         'class': 'w-50'

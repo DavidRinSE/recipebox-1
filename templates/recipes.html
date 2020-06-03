@@ -37,6 +37,13 @@
 
           <dt class="col-sm-3 text-truncate">Instructions</dt>
           <dd class="col-sm-9">{{recipe.instructions}}</dd>
+
+          {% if loggedin %}
+            <dt class="col-sm-3"><a href="{% url 'favorite' recipe.id %}" class="btn btn-primary">Favorite</a></dt>
+          {% endif %}
+          {% if edit %}
+            <dt class="col-sm-3"><a href="{% url 'editrecipe' recipe.id %}" class="btn btn-secondary">Edit</a></dt>
+          {% endif %}
         </dl>
       </main>
     </div>
